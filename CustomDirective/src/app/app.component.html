@@ -1,0 +1,22 @@
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-md-12">
+      <p appBasicHighlight>Style me with basic directive!</p>
+      <p appBetterHighlight [defaultColor]="'yellow'" [highlightColor]="'red'">
+        Style me with the better hightligh directive
+      </p>
+
+      <div *appUnless="onlyOdd">
+        <li class="list-group-item" *ngFor="let even of evenNumbers">
+          {{ even }}
+        </li>
+      </div>
+      <div [ngSwitch]="value">
+        <p *ngSwitchCase="5">Value is 5</p>
+        <p *ngSwitchCase="10">Value is 10</p>
+        <p *ngSwitchCase="100">Value is 100</p>
+        <p *ngSwitchDefault>Default</p>
+      </div>
+    </div>
+  </div>
+</div>
