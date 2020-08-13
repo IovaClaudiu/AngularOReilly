@@ -4,16 +4,16 @@
   </div>
 
   <ul class="nav navbar-expand mr-auto">
-    <li class="nav-item active">
-      <a class="nav-link text-black-50" href="#" (click)="onSelect('recipe')"
+    <li class="nav-item" routerLinkActive="active">
+      <a
+        class="nav-link text-black-50"
+        [routerLink]="['/recipes']"
+        routerLinkActive="active"
         >Recipes</a
       >
     </li>
-    <li class="nav-item">
-      <a
-        class="nav-link text-black-50"
-        href="#"
-        (click)="onSelect('shopping-list')"
+    <li class="nav-item" routerLinkActive="active">
+      <a class="nav-link text-black-50" [routerLink]="['/shopping-list']"
         >Shopping</a
       >
     </li>
@@ -22,7 +22,6 @@
   <ul class="nav navbar-nav navbar-right" appDropdown>
     <li class="dropdown">
       <a
-        href="#"
         role="button"
         class="dropdown-toggle text-black-50"
         data-toggle="dropdown"
@@ -32,8 +31,8 @@
         Manage
       </a>
       <ul class="dropdown-menu bg-light">
-        <li><a class="dropdown-item" href="#">Save Data</a></li>
-        <li><a class="dropdown-item" href="#">Fetch Data</a></li>
+        <li><a class="dropdown-item">Save Data</a></li>
+        <li><a class="dropdown-item">Fetch Data</a></li>
       </ul>
     </li>
   </ul>
