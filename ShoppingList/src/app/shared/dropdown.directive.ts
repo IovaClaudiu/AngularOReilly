@@ -1,28 +1,12 @@
-import {
-  Directive,
-  HostListener,
-  HostBinding,
-  ElementRef,
-} from '@angular/core';
+import { Directive, HostListener, HostBinding } from '@angular/core';
 
 @Directive({
-  selector: '[appDropdown]',
+  selector: '[appDropdown]'
 })
 export class DropdownDirective {
-  open: boolean = false;
+  @HostBinding('class.open') isOpen = false;
 
   @HostListener('click') toggleOpen() {
-    this.open = !this.open;
-    if (this.open)
-      this.elementRef.nativeElement.children[0].children[1].classList.add(
-        'show'
-      );
-    else {
-      this.elementRef.nativeElement.children[0].children[1].classList.remove(
-        'show'
-      );
-    }
+    this.isOpen = !this.isOpen;
   }
-
-  constructor(private elementRef: ElementRef) {}
 }

@@ -1,39 +1,23 @@
-<nav class="navbar navbar-light bg-light mb-4">
-  <div class="navbar-header">
-    <a href="#" class="navbar-brand ml-4">Recipe Book</a>
-  </div>
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a href="#" class="navbar-brand">Recipe Book</a>
+    </div>
 
-  <ul class="nav navbar-expand mr-auto">
-    <li class="nav-item" routerLinkActive="active">
-      <a
-        class="nav-link text-black-50"
-        [routerLink]="['/recipes']"
-        routerLinkActive="active"
-        >Recipes</a
-      >
-    </li>
-    <li class="nav-item" routerLinkActive="active">
-      <a class="nav-link text-black-50" [routerLink]="['/shopping-list']"
-        >Shopping</a
-      >
-    </li>
-  </ul>
-
-  <ul class="nav navbar-nav navbar-right" appDropdown>
-    <li class="dropdown">
-      <a
-        role="button"
-        class="dropdown-toggle text-black-50"
-        data-toggle="dropdown"
-        aria-haspopup="true"
-        aria-expanded="false"
-      >
-        Manage
-      </a>
-      <ul class="dropdown-menu bg-light">
-        <li><a class="dropdown-item">Save Data</a></li>
-        <li><a class="dropdown-item">Fetch Data</a></li>
+    <div class="collapse navbar-collapse">
+      <ul class="nav navbar-nav">
+        <li routerLinkActive="active"><a routerLink="/recipes">Recipes</a></li>
+        <li routerLinkActive="active"><a routerLink="/shopping-list">Shopping List</a></li>
       </ul>
-    </li>
-  </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li class="dropdown" appDropdown>
+          <a style="cursor: pointer;" class="dropdown-toggle" role="button">Manage <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a style="cursor: pointer;">Save Data</a></li>
+            <li><a style="cursor: pointer;">Fetch Data</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
 </nav>
