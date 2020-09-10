@@ -3,7 +3,8 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  apiUrl: "https://shoppinglist-3f4f5.firebaseio.com/recipes.json",
 };
 
 /*
