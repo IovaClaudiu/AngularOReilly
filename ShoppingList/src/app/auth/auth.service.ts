@@ -1,3 +1,4 @@
+import { Router } from "@angular/router";
 import { User } from "./user.model";
 import { environment } from "./../../environments/environment";
 import { HttpClient, HttpErrorResponse } from "@angular/common/http";
@@ -18,8 +19,9 @@ export interface AuthResponseData {
 @Injectable({ providedIn: "root" })
 export class AuthService {
   user = new BehaviorSubject<User>(null);
+  private tokenTimer: any;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private router: Router) {}
 
   signup(email: string, password: string): Observable<AuthResponseData> {
     return this.http
@@ -61,6 +63,49 @@ export class AuthService {
       );
   }
 
+  autoLogin() {
+    const userData: {
+      email: string;
+      id: string;
+      _token: string;
+      _tokenExpirationDate: string;
+    } = JSON.parse(localStorage.getItem(`${environment.user}`));
+
+    if (!userData) {
+      return;
+    }
+    const loadedUser = new User(
+      userData.email,
+      userData.id,
+      userData._token,
+      new Date(userData._tokenExpirationDate)
+    );
+
+    if (loadedUser.token) {
+      this.user.next(loadedUser);
+      const expirationDuration =
+        new Date(userData._tokenExpirationDate).getTime() -
+        new Date().getTime();
+      this.autoLogout(expirationDuration);
+    }
+  }
+
+  logout() {
+    this.user.next(null);
+    this.router.navigate(["/auth"]);
+    localStorage.removeItem(`${environment.user}`);
+    if (this.tokenTimer) {
+      clearTimeout(this.tokenTimer);
+    }
+    this.tokenTimer = null;
+  }
+
+  autoLogout(expirationDuration: number) {
+    this.tokenTimer = setTimeout(() => {
+      this.logout();
+    }, expirationDuration);
+  }
+
   private handleAuthentication(
     email: string,
     userId: string,
@@ -70,6 +115,8 @@ export class AuthService {
     const expirationData = new Date(new Date().getTime() + expiresIn * 1000);
     const user = new User(email, userId, token, expirationData);
     this.user.next(user);
+    this.autoLogout(expiresIn * 1000);
+    localStorage.setItem(`${environment.user}`, JSON.stringify(user));
   }
 
   private handleError(errorRes: HttpErrorResponse) {

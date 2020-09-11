@@ -1,9 +1,11 @@
+import { AlertComponent } from "./shared/alert/alert.component";
+import { AuthInterceptorService } from "./auth/auth-interceptor.service";
 import { LoadingSpinnerComponent } from "./shared/loading-spinner/loading-spinner.component";
 import { AuthComponent } from "./auth/auth.component";
 import { BrowserModule } from "@angular/platform-browser";
 import { NgModule } from "@angular/core";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
-import { HttpClientModule } from "@angular/common/http";
+import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
 
 import { AppComponent } from "./app.component";
 import { HeaderComponent } from "./header/header.component";
@@ -35,6 +37,7 @@ import { RecipeService } from "./recipes/recipe.service";
     RecipeEditComponent,
     AuthComponent,
     LoadingSpinnerComponent,
+    AlertComponent,
   ],
   imports: [
     BrowserModule,
@@ -43,7 +46,15 @@ import { RecipeService } from "./recipes/recipe.service";
     AppRoutingModule,
     HttpClientModule,
   ],
-  providers: [ShoppingListService, RecipeService],
+  providers: [
+    ShoppingListService,
+    RecipeService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptorService,
+      multi: true,
+    },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
