@@ -1,3 +1,4 @@
+import { LoggingService } from "./../logging.service";
 import { CommonModule } from "@angular/common";
 import { DropdownDirective } from "./dropdown.directive";
 import { LoadingSpinnerComponent } from "./loading-spinner/loading-spinner.component";
@@ -13,5 +14,6 @@ import { NgModule } from "@angular/core";
     DropdownDirective,
     CommonModule,
   ],
+  //providers: [LoggingService],
 })
 export class SharedModule {}

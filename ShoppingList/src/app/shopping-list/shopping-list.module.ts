@@ -1,3 +1,4 @@
+import { LoggingService } from "./../logging.service";
 import { SharedModule } from "./../shared/shared.module";
 import { RouterModule } from "@angular/router";
 import { ShoppingEditComponent } from "./shopping-edit/shopping-edit.component";
@@ -17,5 +18,6 @@ import { FormsModule } from "@angular/forms";
     ]),
     SharedModule,
   ],
+  // providers: [LoggingService],
 })
 export class ShoppingListModule {}
